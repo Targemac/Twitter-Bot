@@ -1,0 +1,16 @@
+{
+  "name": "my-first-node-app",
+  "version": "1.0.0",
+  "description": "A Twitter Bot Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "charles targema",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "lodash": "^4.17.21",
+    "twitter": "^1.7.1"
+  }
+}
