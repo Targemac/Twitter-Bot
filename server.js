@@ -4,14 +4,27 @@ var Twitter = require('twitter');
 var express = require('express');
 var generate = require('./lib/generate');
 var app = express();
-var port = 3000;
-var tweetInterval = 5000; //1800000 tweet after every 30min
+
+var http = require('http');
+
+function keepAlive() {
+    try {
+        http.get('http://whispering-harbor-30111.heroku.com');
+        console.log('GET request sent, kept alive');
+    } catch (e) {
+        console.log(e);
+    }
+}
+setInterval(keepAlive, 600000);
+
+var port = process.env.PORT || 3000;
+var tweetInterval = process.env.TWEET_INTERVAL || 1800000; //1800000 tweet after every 30min
 
 var tweet = new Twitter({
-    consumer_key: '',
-    consumer_secret:'',
-    access_token_key:'',
-    access_token_secret:''
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
 function makeTweet() {
